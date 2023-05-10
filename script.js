@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function() {
 // Set up the canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -201,7 +202,7 @@ function handleSwipe() {
         }
     }
 }
-
+});
 
 
 
