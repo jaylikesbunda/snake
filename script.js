@@ -25,10 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
         canvasWrapper.style.width = `${side}px`;
         canvasWrapper.style.height = `${side}px`;
 
-        // Update widthInBlocks and heightInBlocks
-        widthInBlocks = canvas.width / blockSize;
-        heightInBlocks = canvas.height / blockSize;
-
         // Initialize snake and food after updating canvas size
         snake[0] = {
             x: Math.floor(widthInBlocks / 2),
@@ -47,9 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
             y: Math.floor(Math.random() * (heightInBlocks - 1)) + 1
         };
     }
-
 // Game loop
 function gameLoop() {
+    widthInBlocks = canvas.width / blockSize;
+    heightInBlocks = canvas.height / blockSize;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawSnake();
     drawFood();
@@ -60,6 +58,7 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
+
 
 gameLoop();
 // Draw the snake
