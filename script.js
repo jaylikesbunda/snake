@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function gameLoop() {
     widthInBlocks = canvas.width / blockSize;
     heightInBlocks = canvas.height / blockSize;
-
+    console.log('Game loop');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawSnake();
     drawFood();
