@@ -1,45 +1,52 @@
 document.addEventListener("DOMContentLoaded", function() {
-// Set up the canvas
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+    // Set up the canvas
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-// Set up the game variables
-const blockSize = 10;
-const widthInBlocks = canvas.width / blockSize;
-const heightInBlocks = canvas.height / blockSize;
-let score = 0;
+    // Set up the game variables
+    const blockSize = 10;
+    let widthInBlocks;
+    let heightInBlocks;
+    let score = 0;
 
-// Set up the snake
-let snake = [];
-snake[0] = {
-    x: Math.floor(widthInBlocks / 2),
-    y: Math.floor(heightInBlocks / 2)
-};
-let direction = "right";
+    // Set up the snake
+    let snake = [];
+    let direction = "right";
 
-// Set up the food
-let food = generateFood();
+    // Set up the food
+    let food;
 
-// Set the canvas size and add the resize event listener
-function setCanvasSize() {
-    const canvasWrapper = document.getElementById("canvas-wrapper");
-    const side = Math.min(window.innerWidth, window.innerHeight);
-    canvas.width = side - 4; // Subtract 4 to account for the border width
-    canvas.height = side - 4; // Subtract 4 to account for the border width
-    canvasWrapper.style.width = `${side}px`;
-    canvasWrapper.style.height = `${side}px`;
-}
+    // Set the canvas size and add the resize event listener
+    function setCanvasSize() {
+        const canvasWrapper = document.getElementById("canvas-wrapper");
+        const side = Math.min(window.innerWidth, window.innerHeight);
+        canvas.width = side - 4; // Subtract 4 to account for the border width
+        canvas.height = side - 4; // Subtract 4 to account for the border width
+        canvasWrapper.style.width = `${side}px`;
+        canvasWrapper.style.height = `${side}px`;
 
-setCanvasSize();
-window.addEventListener("resize", setCanvasSize);
+        // Update widthInBlocks and heightInBlocks
+        widthInBlocks = canvas.width / blockSize;
+        heightInBlocks = canvas.height / blockSize;
 
-// Function to generate random food coordinates
-function generateFood() {
-    return {
-        x: Math.floor(Math.random() * (widthInBlocks - 1)) + 1,
-        y: Math.floor(Math.random() * (heightInBlocks - 1)) + 1
-    };
-}
+        // Initialize snake and food after updating canvas size
+        snake[0] = {
+            x: Math.floor(widthInBlocks / 2),
+            y: Math.floor(heightInBlocks / 2)
+        };
+        food = generateFood();
+    }
+
+    setCanvasSize();
+    window.addEventListener("resize", setCanvasSize);
+
+    // Function to generate random food coordinates
+    function generateFood() {
+        return {
+            x: Math.floor(Math.random() * (widthInBlocks - 1)) + 1,
+            y: Math.floor(Math.random() * (heightInBlocks - 1)) + 1
+        };
+    }
 
 // Game loop
 function gameLoop() {
